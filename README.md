@@ -1,4 +1,4 @@
-# ixoopAdminAngular
+# AdminAngular
 
 The primary objective is to design and develop a system which will allow the user to explore store near by area.
 
