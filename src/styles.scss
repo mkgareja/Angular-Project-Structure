@@ -1,0 +1,321 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import 'variable.scss';
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+@import '~ngx-toastr/toastr';
+// if you'd like to use it without importing all of bootstrap it requires 
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~ngx-toastr/toastr-bs4-alert';
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
+@import '~@fullcalendar/list/main.css';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+body {
+    background-color: $body-bg;
+    font-family: 'Helvetica Neue'Helvetica, Arial, sans-serif !important;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    &::after {
+        content: '';
+        display: block;
+        // height: 100px;
+    }
+}
+
+html {
+    height: 100%;
+}
+
+.required {
+    color: #dc3545;
+    font-size: 80%;
+    font-weight: 400;
+}
+
+.m-t-20 {
+    margin-top: 20px;
+}
+
+.p-t-10 {
+    padding-top: 10px;
+}
+
+.card {
+    .card-header {
+        .title {
+            margin: 0;
+            font-size: $font-size-20;
+            line-height: 38px;
+        }
+        .btn {
+            margin: 0 10px;
+        }
+    }
+    .card-body {
+        &.scroll-table {
+            height: 300px;
+            overflow-x: scroll;
+        }
+    }
+}
+
+.table {
+    .thead-dark th {
+        color: $white;
+        background-color: $backgroundColor; //#d3e1e6;
+        border-color: $white;
+    }
+    td,
+    th {
+        white-space: normal !important;
+        &.selection-box {
+            width: 47px;
+            text-align: center;
+        }
+    }
+    .action-td {
+        padding: 5px 12px;
+        white-space: nowrap !important;
+        .btn {
+            width: 34px;
+            height: 34px;
+            padding: 0;
+            margin: 0 1px;
+            text-align: center;
+            color: $iconButtonColor;
+            border-color: transparent;
+            background-color: transparent;
+            &:hover,
+            &:active,
+            &:focus,
+            &.active {
+                box-shadow: unset;
+                color: $iconButtonColor;
+                border-color: transparent;
+                background-color: transparent;
+            }
+        }
+    }
+    tr {
+        &.active {
+            color: #212529;
+            background-color: rgba(0, 0, 0, .075);
+        }
+    }
+}
+
+.btn-submit {
+    margin: 10px;
+}
+
+.navbar-static-top {
+    padding: 0;
+    .sidebar-toggle {
+        padding: 14px;
+    }
+}
+
+.search-input {
+    width: 420px;
+    float: right;
+}
+
+.imageThumb {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+.date_Section {
+    position: relative;
+    .date_icon {
+        position: absolute;
+        right: 11px;
+        top: 12px;
+    }
+    .mat-form-field {
+        width: 100%;
+        border: 1px solid #b1c1c9;
+        background-color: #fff;
+        padding: 7px 5px 6px 10px;
+        height: auto;
+        border-radius: 6px;
+        -webkit-appearance: none;
+        .mat-form-field-wrapper {
+            padding-bottom: 0;
+            .mat-form-field-flex {
+                .mat-form-field-infix {
+                    padding: 0;
+                    border-top: none;
+                    input {
+                        font-size: 0.749em;
+                        color: #414141;
+                        font-family: ''Helvetica Neue' Helvetica, Arial, sans-serif !important';
+                    }
+                    .mat-form-field-label-wrapper {
+                        position: absolute;
+                        .mat-form-field-label {
+                            display: none;
+                            &.mat-form-field-empty {
+                                display: block;
+                                margin: 0;
+                                position: unset;
+                                span {
+                                    font-size: 0.749em;
+                                    color: #414141;
+                                    font-family: ''Helvetica Neue' Helvetica, Arial, sans-serif !important';
+                                }
+                            }
+                        }
+                    }
+                }
+                .mat-form-field-suffix {
+                    opacity: 0;
+                    z-index: 1;
+                }
+            }
+            .mat-form-field-underline {
+                display: none;
+            }
+        }
+    }
+}
+
+.modal-center {
+    top: 50%;
+    transform: translateY(-50%) !important;
+}
+
+.previewHeight {
+    height: 500px !important;
+}
+
+
+/*=== Custom Css ===*/
+
+.form-control.ng-touched.ng-invalid {
+    border: 1px solid #dc3545;
+    border-radius: 5px;
+}
+
+.ng-select.ng-touched.ng-invalid {
+    border: 1px solid #dc3545;
+    border-radius: 5px;
+}
+
+.rounded-btn {
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.fc-event-container {
+    a:hover {
+        cursor: pointer !important;
+    }
+}
+
+.custom-staff-drop {
+    .dropdown-list ul {
+        &.item2 {
+            padding-bottom: 20px !important;
+        }
+    }
+}
+
+.name_hover {
+    cursor: pointer;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 32px;
+}
+
+.slick-prev {
+    left: -36px;
+}
+
+.slick-next {
+    right: -25px;
+}
+
+span.logo-mini {
+    text-align: center;
+}
+
+.form-control.ng-touched.ng-invalid {
+    border: 1px solid #dc3545;
+    border-radius: 5px;
+}
+
+.modal-open .modal {
+    padding-top: 10%;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #ffffff;
+}
+
+.page-item.active .page-link {
+    background-color: #00a65a;
+    border-color: #00a65a;
+}
+
+.form-control:focus {
+    border-color: #00a65a;
+}
+
+
+/* Chrome, Safari, Edge, Opera */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* Firefox */
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.header-logo {
+    height: 80px;
+}
+
+img {
+    object-fit: contain;
+}
+
+.msg {
+    background-color: #FFC107 !important;
+    background-image: none !important;
+    overflow: hidden;
+    margin: 5px auto;
+    padding: 10px;
+    width: 300px;
+    border-radius: 3px;
+    color: #000;
+    pointer-events: all;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-link {
+    color: #6c757d;
+    .ngb-tp-chevron::before {
+        border-width: .19em .19em 0 0;
+    }
+}

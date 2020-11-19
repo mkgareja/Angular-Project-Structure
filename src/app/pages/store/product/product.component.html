@@ -1,0 +1,131 @@
+<div class="col-lg-12 product-list">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 text-right mb-3">
+          <button type="button" (click)="onAddProduct()"
+            class="btn btn-style btn-success">{{products.addProducts | translate}}</button>
+          <button type="button" (click)="onAddMultipleProduct()"
+            class="btn btn-style btn-success">{{products.addMultipleProducts | translate}}</button>
+        </div>
+        <ngx-datatable class="material" [rows]="itemProducts" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+          [externalPaging]="true" [count]="totalItems" [offset]="page.pageNumber" [limit]="rowsOnPage"
+          (page)="setPage($event)" columnMode="force"
+          [messages]="{emptyMessage: 'productList.noRecordFoundMessage' | translate}">
+          <ngx-datatable-column name="Image" sortable="false" [width]="10" [resizeable]="false">
+
+            <ng-template let-row="row" let-value="value" prop="image" ngx-datatable-cell-template>
+              <img *ngIf="row.image !== null" src="{{row.image[0].thumb}}" class="img-custom">
+            </ng-template>
+
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Name" sortable="false" [width]="20" [resizeable]="false">
+            <ng-template let-row="row" let-value="value" prop="productname" ngx-datatable-cell-template>
+              <div class="cursorPointer" (click)="onProductDetail(row)">{{row.productname}}</div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Price ($)" sortable="false" prop="price" [width]="10" [resizeable]="false">
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Description" sortable="false" [resizeable]="false">
+            <ng-template let-row="row" let-value="value" prop="description" ngx-datatable-cell-template>
+              <div class="textSpn">{{row.description}}</div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Status" sortable="false" [resizeable]="false">
+            <ng-template let-row="row" let-value="value" prop="pId" ngx-datatable-cell-template>
+              <div class="action-custom" style="float: left;">
+                <ui-switch [checked]="row.isEnable===1
+                  ? true
+                  : false" (change)="onChangeSwitch($event, row)"></ui-switch>
+
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="Actions" sortable="false" [resizeable]="false">
+            <ng-template let-row="row" let-value="value" prop="pId" ngx-datatable-cell-template>
+              <div class="action-custom" style="float: left;">
+                <button type="button" class="btn btn-success" (click)="onEditeProduct(row)" style="margin-left: 0px;">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button button type="button" class="btn btn-danger" (click)="onDeleteProduct(row.pId)">
+                  <i class="fa fa-trash"></i>
+                </button>
+
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #deleteDialog>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">{{'productList.deleteTitle' | translate}}</h4>
+      <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <label>{{'productList.deleteMessage' | translate}}</label>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success"
+        (click)="clickActionDelete()">{{'productList.deleteYes' | translate}}</button>
+      <button type="button" class="btn btn-secondary"
+        (click)="closeModal()">{{'productList.deleteNo' | translate}}</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addProductDialog>
+  <div class="modal-content">
+    <div class="modal-body modal-body-custom">
+      <div>
+        <i class="fa fa-window-close pointer" aria-hidden="true" (click)="closeModal()"></i>
+      </div>
+      <div class="dialog-body">
+        <label>{{'productList.addProductTitle' | translate}}</label>
+        <br />
+        <button type="button" class="btn btn-secondary dialog-btn"
+          (click)="clickScanAdd()">{{'productList.scanAndAdd' | translate}}</button>
+        <br />
+        <label>{{'productList.or' | translate}}</label>
+        <br />
+        <button type="button" class="btn btn-secondary dialog-btn"
+          (click)="clickWithoutScan()">{{'productList.addWithoutScanning' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addMultipleProductDialog>
+  <div class="modal-content">
+    <div class="modal-body modal-body-custom">
+      <div>
+        <i class="fa fa-window-close pointer" aria-hidden="true" (click)="closeModal()"></i>
+      </div>
+      <div class="dialog-body-multiple">
+        <br />
+        <input type="file" #csvFile style="display:none;" accept=".csv" (change)="handleFileInput($event.target.files)">
+        <button type="button" class="btn btn-secondary dialog-btn"
+          (click)="csvFile.click();">{{'productList.uploadCSVfile' | translate}}</button>
+        <br />
+        <label>{{'productList.or' | translate}}</label>
+        <br />
+
+        <button type="button" class="btn btn-secondary dialog-btn" (click)="onDownloadTemplate()">
+          <a *ngIf="hideShowCsvFile" download="templateFile.csv" target="_blank"
+            href="/assets/attachment/multiDishes.csv">
+            {{'productList.downloadTemplateFile' | translate}}
+          </a>
+          <a *ngIf="!hideShowCsvFile" download="templateFile.csv" target="_blank"
+            href="/assets/attachment/multiProduct.csv">
+            {{'productList.downloadTemplateFile' | translate}}
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,42 @@
+<div class="login-pages">
+  <div class="row">
+    <div class="col-md-4  login-logo-section">
+      <div class="loginform-box box">
+        <div class="login-header">
+          <img src="{{logoPath}}" class="header-logo" alt="Please wait..." />
+        </div>
+        <div class="login-title">
+          {{'login.loginTitle' | translate}}
+        </div>
+        <form [formGroup]="loginForm" role="form" novalidate (ngSubmit)="onSubmit()">
+          <div class="form-content">
+            <div class="form-group">
+              <input type="text" class="form-control" id="email" placeholder="{{'login.emailPlaceholder' | translate}}"
+                name="email" formControlName="email" trim="blur" />
+              <app-validation-message [control]="loginForm.controls['email']" [messages]="messageList.email">
+              </app-validation-message>
+
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="password"
+                placeholder="{{'login.passwordPlaceholder' | translate}}" name="password" formControlName="password"
+                trim="blur" />
+              <app-validation-message [control]="loginForm.controls['password']" [messages]="messageList.password">
+              </app-validation-message>
+            </div>
+            <div class="col-xs-12 col-sm-12 text-right pt-8">
+              <b><a class="forgot-pwd" [routerLink]="['/forgot-password']">{{'login.forgotPassword' | translate}}</a></b>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-style btn-success">{{'login.loginBtn' | translate}}</button>
+            </div>
+            <div class="sign-up-link">
+              {{'login.doNotHaveAnAccount' | translate}} <a class="forgot-pwd"
+                [routerLink]="['/sign-up']"><b>{{'login.signUp' | translate}}</b></a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="col-lg-12">
+  <div class="card">
+    <div class="card-header">
+      <h3 *ngIf="headerTitle === 'Add'">{{'productAdd.addTitle' | translate}}</h3>
+      <h3 *ngIf="headerTitle === 'Edit'">{{'productAdd.editTitle' | translate}}</h3>
+      <div class="row">
+        <form class="product-add-from" [formGroup]="productForm" role="form" novalidate (ngSubmit)="onSubmit()">
+          <div class="form-content">
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label class="set-time-title">{{this.productKey.nameLable | translate}}</label>
+                  <input type="text" class="form-control" id="name"
+                    placeholder="{{this.productKey.nameLable | translate}}" name="name" formControlName="name"
+                    trim="blur" min="3" max="150" />
+                  <app-validation-message [control]="productForm.controls['name']" [messages]="messageList.name">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <label class="set-time-title">{{'productAdd.upcCodeLable' | translate}}</label>
+                  <input type="number" class="form-control" id="upcCode" #scanUpcCode
+                    placeholder="{{'productAdd.upcCodeLable' | translate}}" name="upcCode" formControlName="upcCode"
+                    (debounceClick)="processBarCode($event)" appDebounceKeyup />
+                  <app-validation-message [control]="productForm.controls['upcCode']" [messages]="messageList.upcCode">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <label class="set-time-title">{{this.productKey.priceLable | translate}}</label>
+                  <input type="text" class="form-control" id="price"
+                    placeholder="{{this.productKey.priceLable | translate}}" name="price" formControlName="price"
+                    trim="blur" max="5" min="1" />
+                  <app-validation-message [control]="productForm.controls['price']" [messages]="messageList.price">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label class="set-time-title">{{this.productKey.descriptionLable | translate}}</label>
+                  <textarea type="text" class="form-control" id="description"
+                    placeholder="{{this.productKey.descriptionLable | translate}}" name="description"
+                    formControlName="description" trim="blur" max="2000" minx="3"></textarea>
+                  <app-validation-message [control]="productForm.controls['description']"
+                    [messages]="messageList.description">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <label class="logo-lable mr-3">{{'productAdd.imageLable' | translate}}</label>
+                  <div class="logo-group" *ngIf="displayImage.length > 0">
+                    <div class="img-wrap" *ngFor="let image of displayImage; let i = index">
+                      <img [src]="image.image">
+                      <i class="fa fa-window-close pointer" aria-hidden="true" (click)="onRemoveImage(i)"></i>
+                    </div>
+                  </div>
+                  <div class="logo-group p-4" *ngIf="isImage">
+                    <input type="file" #fileInput accept="image/*"
+                      class="logo-input ng-untouched ng-pristine ng-invalid" style="display:none;"
+                      (change)="handleFileInput($event.target.files)">
+                    <i *ngIf="isImage" class="fa fa-plus-square pointer ml-10" (click)="fileInput.click();"
+                      aria-hidden="true"></i>
+                  </div>
+                  <span>
+
+                  </span>
+                  <div>
+                    <app-validation-message [control]="productForm.controls['productImage']"
+                      [messages]="messageList.productImage">
+                    </app-validation-message>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 text-center">
+                <div class="form-group">
+                  <button type="submit"
+                    class="btn btn-style btn-success">{{'productAdd.submitBtn' | translate}}</button>
+                  <button type="button" class="btn btn-style btn-success"
+                    (click)="onCancel()">{{'productAdd.cancelBtn' | translate}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

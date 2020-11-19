@@ -1,0 +1,108 @@
+.product-list {
+  ngx-datatable {
+    width: 100%;
+
+    .empty-row {
+      text-align: center !important;
+    }
+  }
+
+  .card-header {
+    background-color: transparent;
+  }
+
+  .card {
+    background-color: transparent;
+    border: none;
+  }
+
+  .action-custom {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .img-custom {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.modal-body-custom {
+  text-align: center;
+}
+
+.paginator-custom {
+  float: right;
+}
+
+.custom-switch {
+  display: inline;
+}
+
+.slow .toggle-group {
+  transition: left 0.7s;
+  -webkit-transition: left 0.7s;
+}
+
+.dialog-btn {
+  width: 250px;
+  margin: 20px 0px;
+}
+
+.pointer {
+  cursor: pointer;
+  float: right;
+}
+
+.dialog-body {
+  margin-top: 35px;
+
+  label {
+    font-size: 1.5rem;
+  }
+}
+
+.dialog-body-multiple {
+  margin-top: 15px;
+
+  label {
+    font-size: 1.5rem;
+  }
+}
+
+.row-clicked {
+  cursor: pointer;
+  display: contents;
+}
+
+thead {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+a {
+  color: #ffffff;
+}
+
+a:hover,
+a:active,
+a:focus {
+  color: #ffffff;
+}
+
+::ng-deep {
+  .datatable-body .empty-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.cursorPointer {
+  cursor: pointer;
+}
+.textSpn {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}

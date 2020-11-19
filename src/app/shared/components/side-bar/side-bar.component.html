@@ -1,0 +1,81 @@
+<mk-layout-sidebar-left>
+    <div class="skin-green sidebar-mini">
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <ul id="side-menu" class="sidebar-menu" [ngClass]="activeMenu" *ngIf="sideMenu && sideMenu.length > 0">
+                    <ng-container *ngFor="let menu of sideMenu; let i = index;">
+                        <li *ngIf="menu.route" class="menu2" [ngClass]="activeClass(menu.label, 'li')"
+                            [routerLink]="[menu.route]">
+                            <a href="javascript:" aria-expanded="false" data-toggle="collapse">
+                                <i *ngIf="menu.iconClasses" class="{{menu.iconClasses}}"></i>
+                                <span class="labelMenu">{{menu.label}}</span>
+                            </a>
+                        </li>
+                        <li *ngIf="!menu.route" class="menu1" [ngClass]="activeClass(menu.label, 'li')">
+                            <a *ngIf="menu.label === 'Logout'" (click)="onLogout()" aria-expanded="false"
+                                data-toggle="collapse">
+                                <i *ngIf="menu.iconClasses" class="{{menu.iconClasses}}"></i>
+                                <span class="labelMenu">{{menu.label}}
+                                </span>
+                            </a>
+                            <a *ngIf="menu.label !== 'Logout'" href="javascript:" aria-expanded="false"
+                                data-toggle="collapse">
+                                <i *ngIf="menu.iconClasses" class="{{menu.iconClasses}}"></i>
+                                <span class="labelMenu">{{menu.label}}
+                                    <span class="bedge pull-right" [ngClass]="activeClass(menu.label, 'bedge')">
+                                        {{ agenda }}
+                                    </span>
+                                </span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ng-container *ngIf="menu['children'] && menu['children'].length > 0">
+                                <ul class="treeview-menu2 {{menu.label+i}}" [ngClass]="activeClass(menu.label, 'ul')">
+                                    <ng-container *ngFor="let cmenu of menu.children; let j = index;">
+                                        <li *ngIf="cmenu.route" [routerLink]="[cmenu.route]"
+                                            [ngClass]="activeClass(cmenu.label, 'child1-li', menu.label)">
+                                            <a href="javascript:" aria-expanded="false">
+                                                <i *ngIf="cmenu.iconClasses" class="{{cmenu.iconClasses}}"></i>
+                                                <span>{{cmenu.label}}
+                                                    <span *ngIf="cmenu.label === 'To Do'" class="bedge pull-right"
+                                                        [ngClass]="activeClass(cmenu.label, 'bedge')">
+                                                        {{ todo }}
+                                                    </span>
+                                                    <span *ngIf="cmenu.label === 'Calendar Management'"
+                                                        class="bedge pull-right"
+                                                        [ngClass]="activeClass(cmenu.label, 'bedge')">
+                                                        {{ event }}
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ng-container>
+                                </ul>
+                            </ng-container>
+                        </li>
+                    </ng-container>
+
+
+                </ul>
+            </section>
+        </aside>
+    </div>
+</mk-layout-sidebar-left>
+<ng-template #logoutDialog>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{{'dashboard.logoutTitle' | translate}}</h4>
+            <button type="button" class="close" (click)="onCloseModal()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <label>{{'dashboard.logoutMessage' | translate}}</label>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success"
+                (click)="onClickActionLogout()">{{'dashboard.logoutYes' | translate}}</button>
+            <button type="button" class="btn btn-secondary"
+                (click)="onCloseModal()">{{'dashboard.logoutNo' | translate}}</button>
+        </div>
+    </div>
+</ng-template>

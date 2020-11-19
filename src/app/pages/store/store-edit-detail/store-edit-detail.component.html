@@ -1,0 +1,291 @@
+<div class="store-detils-up-pages">
+    <div class="row">
+        <div class="store-detils-up-logo-section">
+            <div class="store-detils-up-form-box box">
+                <div class="store-detils-up-title">
+                    {{'storeEditDetail.title' | translate}}
+                </div>
+                <form [formGroup]="storeEditDetailForm" role="form" novalidate (ngSubmit)="onSubmit()">
+                    <div class="form-content">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group logo-group">
+                                    <input #fileInput type="file" type="file" id="profileImage"
+                                        formControlName="profileImage" accept="image/*"
+                                        (change)="handleFileInput($event.target.files)" hidden=""
+                                        class="logo-input ng-untouched ng-pristine ng-invalid">
+                                    <img [src]="imgURL" height="100" *ngIf="imgURL">
+                                    <span>
+                                        <i *ngIf="!imgURL" class="fa fa-upload pointer" aria-hidden="true"
+                                            (click)="fileInput.click();"></i>
+                                        <i *ngIf="imgURL && !this.storeEditDetailForm.disabled"
+                                            class="fa fa-window-close pointer" aria-hidden="true"
+                                            (click)="onRemoveImage()"></i>
+                                    </span>
+
+                                    <div class="log-error">
+                                        <app-validation-message [hidden]="isFormDisabled"
+                                            [control]="storeEditDetailForm.controls['profileImage']"
+                                            [messages]="messageList.profileImage">
+                                        </app-validation-message>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>{{'storeEditDetail.storeNamePlaceholder' | translate}}</label>
+                                    <input type="text" class="form-control" id="storename"
+                                        placeholder="{{'storeEditDetail.storeNamePlaceholder' | translate}}"
+                                        name="storename" formControlName="storename" trim="blur" />
+                                    <app-validation-message [control]="storeEditDetailForm.controls['storename']"
+                                        [messages]="messageList.storename">
+                                    </app-validation-message>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>{{'storeEditDetail.storeCategoryPlaceholder' | translate}}</label>
+                                    <select class="form-control" formControlName="categoryId" disabled>
+                                        <option disabled value=categoryId>
+                                            {{'storeEditDetail.storeCategoryPlaceholder' | translate}}
+                                        </option>
+                                        <option *ngFor="let category of categoriesList" [value]="category.cId">
+                                            {{category.categoryName}}
+                                        </option>
+                                    </select>
+                                    <app-validation-message [control]="storeEditDetailForm.controls['categoryId']"
+                                        [messages]="messageList.categoryId">
+                                    </app-validation-message>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>{{'storeEditDetail.emailPlaceholder' | translate}}</label>
+                                    <input type="email" class="form-control" id="email"
+                                        placeholder="{{'storeEditDetail.emailPlaceholder' | translate}}" name="email"
+                                        formControlName="email" trim="blur" />
+                                    <app-validation-message [control]="storeEditDetailForm.controls['email']"
+                                        [messages]="messageList.email">
+                                    </app-validation-message>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>{{'storeEditDetail.phonePlaceholder' | translate}}</label>
+                                    <input type="number" class="form-control" id="mobile"
+                                        placeholder="{{'storeEditDetail.phonePlaceholder' | translate}}" name="mobile"
+                                        formControlName="mobile" trim="blur" />
+                                    <app-validation-message [control]="storeEditDetailForm.controls['mobile']"
+                                        [messages]="messageList.mobile">
+                                    </app-validation-message>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label>{{'storeEditDetail.addressLine1Placeholder' | translate}}</label>
+                                    <input type="text" class="form-control" id="addressLine1"
+                                        placeholder="{{'storeEditDetail.addressLine1Placeholder' | translate}}"
+                                        name="addressLine1" formControlName="addressLine1" trim="blur"
+                                        (onAddressChange)="handleAddressChange($event)" ngx-google-places-autocomplete
+                                        [options]="{componentRestrictions: { country: 'US' }}"
+                                        #placesRef="ngx-places" />
+                                    <app-validation-message [control]="storeEditDetailForm.controls['addressLine1']"
+                                        [messages]="messageList.addressLine1">
+                                    </app-validation-message>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label>{{'storeEditDetail.addressLine2Placeholder' | translate}}</label>
+                                    <input type="text" class="form-control" id="addressLine2"
+                                        placeholder="{{'storeEditDetail.addressLine2Placeholder' | translate}}"
+                                        name="addressLine2" formControlName="addressLine2" trim="blur" />
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>{{'storeEditDetail.countryPlaceholder' | translate}}</label>
+                                    <select #myCountry class="form-control" formControlName="country"
+                                        (change)="onCountryChange(myCountry.value)">
+                                        <option disabled value=''>{{'storeEditDetail.countryPlaceholder' | translate}}
+                                        </option>
+                                        <option *ngFor="let country of countryList" [value]="country.ID">
+                                            {{country.COUNTRY_NAME}}
+                                        </option>
+                                    </select>
+                                    <app-validation-message [control]="storeEditDetailForm.controls['country']"
+                                        [messages]="messageList.country">
+                                    </app-validation-message>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>{{'storeEditDetail.statePlaceholder' | translate}}</label>
+                                    <select #myState class="form-control" formControlName="stateId"
+                                        (change)="onStateChange(myState.value)">
+                                        <option disabled value=''>{{'storeEditDetail.statePlaceholder' | translate}}
+                                        </option>
+                                        <option *ngFor="let state of stateList" [value]="state.id">
+                                            {{state.STATE_NAME}}
+                                        </option>
+                                    </select>
+                                    <app-validation-message [control]="storeEditDetailForm.controls['stateId']"
+                                        [messages]="messageList.stateId">
+                                    </app-validation-message>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>{{'storeEditDetail.cityPlaceholder' | translate}}</label>
+                                    <input type="text" class="form-control" id="cityName"
+                                        placeholder="{{'storeEditDetail.cityPlaceholder' | translate}}" name="cityName"
+                                        formControlName="cityName" trim="blur" />
+                                    <app-validation-message [control]="storeEditDetailForm.controls['cityName']"
+                                        [messages]="messageList.cityId">
+                                    </app-validation-message>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>{{'storeEditDetail.zipCodePlaceholder' | translate}}</label>
+                                    <input type="number" class="form-control" id="zipcode"
+                                        placeholder="{{'storeEditDetail.zipCodePlaceholder' | translate}}"
+                                        name="zipcode" formControlName="zipcode" trim="blur" />
+                                    <app-validation-message [control]="storeEditDetailForm.controls['zipcode']"
+                                        [messages]="messageList.zipcode">
+                                    </app-validation-message>
+                                </div>
+                            </div>
+                            <div class="shop-time-box">
+                                <div class="set-time-shop-lable">
+                                    {{'setTime.shopTimingsLable' | translate}}
+                                </div>
+                                <div class="row cust-padding align-items-center1">
+                                    <div class="col-md-2 col-sm-2 pt-5">
+                                        <label
+                                            class="set-time-title p-0">{{'storeEditDetail.weekdaysLable' | translate}}</label>
+                                        &nbsp;&nbsp;
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 pl-4">
+                                        <div class="cust-input">
+                                            <ngb-timepicker formControlName="weekdaysOpenTime"></ngb-timepicker>
+                                            <div>
+                                                <app-validation-message
+                                                    [control]="storeEditDetailForm.controls['weekdaysOpenTime']"
+                                                    [messages]="messageList.weekdaysOpenTime">
+                                                </app-validation-message>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-sm-5">
+                                        <div class="cust-input">
+                                            <ngb-timepicker formControlName="weekdaysCloseTime"></ngb-timepicker>
+                                            <div>
+                                                <app-validation-message
+                                                    [control]="storeEditDetailForm.controls['weekdaysCloseTime']"
+                                                    [messages]="messageList.weekdaysCloseTime">
+                                                </app-validation-message>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row cust-padding align-items-center">
+                                    <div class="col-sm-2">
+                                        <label
+                                            class="set-time-title p-0">{{'setTime.saturdayOpenLable' | translate}}</label>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <ui-switch [checked]="" formControlName="isSaturdayOpen"
+                                            (change)="onChangeSwitch($event,false)">
+                                        </ui-switch>
+                                    </div>
+                                </div>
+                                <div class="row cust-padding align-items-center1"
+                                    *ngIf="storeEditDetailForm.controls.isSaturdayOpen.value">
+                                    <div class="col-sm-2 pt-5">
+                                        <label
+                                            class="set-time-title p-0">{{'storeEditDetail.saturdayLable' | translate}}</label>
+                                    </div>
+                                    <div class="col-sm-5 pl-4">
+                                        <div class="cust-input">
+                                            <ngb-timepicker formControlName="saturdayOpenTime"></ngb-timepicker>
+                                            <div>
+                                                <app-validation-message
+                                                    [control]="storeEditDetailForm.controls['saturdayOpenTime']"
+                                                    [messages]="messageList.saturdayOpenTime">
+                                                </app-validation-message>
+                                            </div>
+                                        </div>
+                                        <label class="set-time-title p-0" for="saturdayOpenTime"></label>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="cust-input">
+                                            <ngb-timepicker formControlName="saturdayCloseTime"></ngb-timepicker>
+                                            <div>
+                                                <app-validation-message
+                                                    [control]="storeEditDetailForm.controls['saturdayCloseTime']"
+                                                    [messages]="messageList.saturdayCloseTime">
+                                                </app-validation-message>
+                                            </div>
+                                        </div>
+                                        <label class="set-time-title p-0" for="saturdayCloseTime"></label>
+                                    </div>
+                                </div>
+                                <div class="row cust-padding align-items-center">
+                                    <div class="col-sm-2">
+                                        <label
+                                            class="set-time-title p-0">{{'storeEditDetail.sundayOpenLable' | translate}}</label>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <ui-switch [checked]="" formControlName="isSundayOpen"
+                                            (change)="onChangeSwitch($event,true)">
+                                        </ui-switch>
+                                    </div>
+                                </div>
+                                <div class="row cust-padding align-items-center1"
+                                    *ngIf="storeEditDetailForm.controls.isSundayOpen.value">
+                                    <div class="col-sm-2 pt-5">
+                                        <label
+                                            class="set-time-title p-0">{{'storeEditDetail.sundayLable' | translate}}</label>
+                                    </div>
+                                    <div class="col-sm-5 pl-4">
+                                        <div class="cust-input">
+                                            <ngb-timepicker formControlName="sundayOpenTime"></ngb-timepicker>
+                                            <div>
+                                                <app-validation-message
+                                                    [control]="storeEditDetailForm.controls['sundayOpenTime']"
+                                                    [messages]="messageList.sundayOpenTime">
+                                                </app-validation-message>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="cust-input">
+                                            <ngb-timepicker formControlName="sundayCloseTime"></ngb-timepicker>
+                                            <div>
+                                                <app-validation-message
+                                                    [control]="storeEditDetailForm.controls['sundayCloseTime']"
+                                                    [messages]="messageList.sundayCloseTime">
+                                                </app-validation-message>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <div class="form-group">
+                                    <button [hidden]="!isFormDisabled" type="button" class="btn btn-style btn-success"
+                                        (click)="redirectToEdit()">{{'storeEditDetail.editBtn' | translate}}</button>
+                                    <button [hidden]="isFormDisabled" type="submit"
+                                        class="btn btn-style btn-success">{{'storeEditDetail.saveBtn' | translate}}</button>
+                                    <button type="button" class="btn btn-style btn-success ml-3"
+                                        (click)="backToProduct()">{{'storeEditDetail.backBtn' | translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

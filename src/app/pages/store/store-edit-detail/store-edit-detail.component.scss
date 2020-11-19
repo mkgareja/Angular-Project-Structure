@@ -1,0 +1,220 @@
+@import '../../../../variable.scss';
+.store-detils-up-pages {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    text-align: center;
+    color: $white;
+    padding: 3em;
+    height: -webkit-fill-available;
+    // background-color: $light-gray;
+    .col-lg-4 {
+        padding: 0;
+    }
+    .store-detils-up-logo-section {
+        margin: 0 auto;
+        min-width: 500px;
+    }
+    .input-lg {
+        height: 46px;
+        padding: 10px 16px;
+        font-size: $font-size-18;
+        line-height: 1.3333333;
+        border-radius: 0;
+    }
+    .store-detils-up-wrapper {
+        margin-top: 20px;
+    }
+    .log-error {
+        justify-content: center;
+        display: flex;
+    }
+    .rounded-btn {
+        font-size: $font-size-18;
+        cursor: pointer;
+        line-height: 40px;
+        padding: 0 25px;
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+    .margin-bottom-no {
+        margin-bottom: 0;
+    }
+    label {
+        color: black;
+        float: left;
+    }
+    .form-group {
+        padding: 8px 0;
+        input::-webkit-input-placeholder {
+            color: $gray !important;
+        }
+        input:-moz-placeholder {
+            color: $gray !important;
+        }
+        input::-moz-placeholder {
+            color: $gray !important;
+        }
+        input:-ms-input-placeholder {
+            color: $gray !important;
+        }
+    }
+    .cust-padding {
+        padding: 15px 0;
+    }
+    .store-detils-up-form-box {
+        border-top: none;
+        background-color: $white;
+        .form-content {
+            padding: 22px;
+        }
+        .store-detils-up-header {
+            padding-top: 22px;
+            img {
+                padding: 10px;
+            }
+        }
+        .store-detils-up-title {
+            color: black;
+            padding: 22px 22px 0 22px;
+        }
+    }
+    .cust-input {
+        position: relative;
+        span {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            .field-icon {
+                color: black;
+            }
+        }
+    }
+}
+
+.store-detils-up-pages:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    // background: url("../../assets/img/bg.png");
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    z-index: -1;
+    filter: alpha(opacity=20);
+}
+
+.btn-primary {
+    color: $button-bg;
+    background-color: $white;
+    border-color: $button-bg;
+}
+
+.btn-primary:focus {
+    box-shadow: unset !important;
+}
+
+.btn-primary:hover,
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    color: $white;
+    background-color: $button-bg;
+    border-color: $button-bg;
+}
+
+
+/*== Logo Bottom Sitcky*/
+
+.store-detils-up-pages {
+    position: relative;
+}
+
+.logo-lable {
+    float: left;
+    color: #000;
+}
+
+.logo-input {
+    display: block;
+    padding-left: 10px;
+}
+
+.pointer {
+    cursor: pointer;
+    color: #000;
+}
+
+.shop-time-box {
+    // display: grid;
+    width: 50%;
+    margin: 0 auto;
+    // justify-content: center;
+    .form-inline {
+        display: inline-flex !important;
+        float: left;
+    }
+    .set-time-title {
+        color: black;
+        padding: 22px;
+    }
+    .set-time-shop-lable {
+        color: #000;
+        // float: left;
+        text-align: initial;
+        font-size: x-large;
+    }
+}
+
+.img-wrap {
+    position: relative;
+    display: initial;
+}
+
+.img-wrap .close {
+    position: absolute;
+    right: 2px;
+    z-index: 100;
+}
+
+.form-group.logo-group {
+    border: solid 1px #d2d6de;
+    display: inline-block;
+    padding: 15px 30px !important;
+    margin-bottom: 25px;
+    position: relative;
+    max-width: 200px;
+    max-height: 169px;
+    img {
+        margin: 10px auto 10px;
+        max-width: 100%;
+    }
+    .fa-upload {
+        font-size: 30px;
+    }
+    .fa-window-close {
+        position: absolute;
+        right: 26px;
+        top: 16px;
+    }
+    .fa-minus {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 15px;
+    }
+}
+
+.form-text.text-muted.error {
+    width: 100%;
+}
+
+.cust-input {
+    display: inline-block;
+    width: 100%;
+}

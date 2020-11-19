@@ -1,0 +1,79 @@
+.product-add-from {
+  width: 100%;
+  padding: 25px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.card-header {
+  background-color: white;
+}
+
+.img-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+img {
+  height: 100px;
+  width: 100px;
+  margin-left: 20px;
+}
+
+.img-wrap .close {
+  position: absolute;
+  right: 2px;
+  z-index: 100;
+}
+
+.form-group {
+  .logo-group {
+    border: solid 1px #d2d6de;
+    display: inline-block;
+    padding: 15px;
+    margin-bottom: 25px;
+    position: relative;
+    margin-left: 10px;
+    img {
+      margin: 10px;
+      max-width: 100%;
+    }
+    .fa-upload {
+      font-size: 30px;
+    }
+    .fa-window-close {
+      position: absolute;
+      right: 10px;
+      top: 0;
+      //  top: 16px;
+    }
+    .fa-minus {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 15px;
+    }
+    .img-wrap {
+      &::after {
+        content: "";
+        width: 1px;
+        position: absolute;
+        top: -15px;
+        bottom: -15px;
+        background-color: #d2d6de;
+      }
+      &:last-child {
+        &::after {
+          background-color: transparent;
+        }
+      }
+    }
+    .img-wrap .close {
+      position: absolute;
+      right: 10px;
+      z-index: 100;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<mk-layout-header [isSidebarLeftToggle]="true" [isSidebarRightToggle]="false" [logoLink]="['/', 'store', 'products']">
+    <mk-layout-header-logo>
+        <img *ngIf="storeDetails && storeDetails.image && storeDetails.image.thumb" src="{{storeDetails.image.thumb}}"
+            alt="logo" class="logo-lg-img">
+    </mk-layout-header-logo>
+    <mk-layout-header-logo-mini>
+        <img *ngIf="storeDetails && storeDetails.image && storeDetails.image.thumb" src="{{storeDetails.image.thumb}}"
+            class="logo-min-g">
+    </mk-layout-header-logo-mini>
+    <div class="profile-users mr-3">
+        <label class="mb-0 lblUserName">{{'dashboard.hiLabel' | translate }} {{storeDetails?.storename}}</label>
+    </div>
+</mk-layout-header>

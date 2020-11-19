@@ -1,0 +1,185 @@
+<div class="sign-up-pages">
+  <div class="row">
+    <div class="col-md-4  sign-up-logo-section">
+      <div class="sign-up-form-box box">
+        <div class="sign-up-header">
+          <img src="{{logoPath}}" class="header-logo" alt="Please wait..." />
+        </div>
+        <div class="sign-up-title">
+          {{'signUp.title' | translate}}
+        </div>
+        <form [formGroup]="signUpForm" role="form" novalidate (ngSubmit)="onSubmit()">
+          <div class="form-content">
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <label class="logo-lable mr-3">{{'signUp.logoTitle' | translate}}</label>
+                <div class="form-group logo-group">
+                  <input #fileInput type="file" type="file" id="profileImage" accept="image/*"
+                    (change)="handleFileInput($event.target.files)" hidden=""
+                    class="logo-input ng-untouched ng-pristine ng-invalid">
+                  <img [src]="imgURL" height="100" *ngIf="imgURL">
+                  <span>
+                    <img *ngIf="!imgURL" [src]="uploadLogoPath" class="uploadLogoImage pointer"
+                      (click)="fileInput.click();">
+                    <i *ngIf="imgURL" class="fa fa-window-close pointer" aria-hidden="true"
+                      (click)="onRemoveImage()"></i>
+                  </span>
+                  <div class="log-error">
+                    <!-- <app-validation-message [control]="signUpForm.controls['profileImage']" [messages]="messageList.profileImage">
+                                        </app-validation-message> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="storename"
+                    placeholder="{{'signUp.storeNamePlaceholder' | translate}}" name="storename"
+                    formControlName="storename" trim="blur" max="100" min="3" />
+                  <app-validation-message [control]="signUpForm.controls['storename']"
+                    [messages]="messageList.storename">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <select class="form-control" formControlName="categoryId">
+                    <option disabled value=''>{{'signUp.storeCategoryPlaceholder' | translate}}
+                    </option>
+                    <option *ngFor="let category of categoriesList" [value]="category.cId">
+                      {{category.categoryName}}
+                    </option>
+                  </select>
+                  <app-validation-message [control]="signUpForm.controls['categoryId']"
+                    [messages]="messageList.categoryId">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <input type="email" class="form-control" id="email"
+                    placeholder="{{'signUp.emailPlaceholder' | translate}}" name="email" formControlName="email"
+                    trim="blur" />
+                  <app-validation-message [control]="signUpForm.controls['email']" [messages]="messageList.email">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <input type="number" class="form-control" id="mobile"
+                    placeholder="{{'signUp.phonePlaceholder' | translate}}" name="mobile" formControlName="mobile"
+                    trim="blur" />
+                  <app-validation-message [control]="signUpForm.controls['mobile']" [messages]="messageList.mobile">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+
+                  <input type="text" class="form-control" id="addressLine1"
+                    placeholder="{{'signUp.addressLine1Placeholder' | translate}}" name="addressLine1"
+                    formControlName="addressLine1" trim="blur" (onAddressChange)="handleAddressChange($event)"
+                    ngx-google-places-autocomplete [options]="{componentRestrictions: { country: 'US' }}"
+                    #placesRef="ngx-places" />
+
+
+                  <app-validation-message [control]="signUpForm.controls['addressLine1']"
+                    [messages]="messageList.addressLine1">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="addressLine2"
+                    placeholder="{{'signUp.addressLine2Placeholder' | translate}}" name="addressLine2"
+                    formControlName="addressLine2" trim="blur" />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <select #myCountry class="form-control" formControlName="country"
+                    (change)="onCountryChange(myCountry.value)">
+                    <option disabled value=''>{{'signUp.countryPlaceholder' | translate}}</option>
+                    <option *ngFor="let country of countryList" [value]="country.ID">
+                      {{country.COUNTRY_NAME}}
+                    </option>
+                  </select>
+                  <app-validation-message [control]="signUpForm.controls['country']" [messages]="messageList.country">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <select #myState class="form-control" formControlName="stateId"
+                    (change)="onStateChange(myState.value)">
+                    <option disabled value=''>{{'signUp.statePlaceholder' | translate}}</option>
+                    <option *ngFor="let state of stateList" [value]="state.id">
+                      {{state.STATE_NAME}}
+                    </option>
+                  </select>
+                  <app-validation-message [control]="signUpForm.controls['stateId']" [messages]="messageList.stateId">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="cityId"
+                    placeholder="{{'signUp.cityPlaceholder' | translate}}" name="cityId" formControlName="cityName"
+                    trim="blur" />
+                  <app-validation-message [control]="signUpForm.controls['cityName']" [messages]="messageList.cityId">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <input type="number" class="form-control" id="zipcode"
+                    placeholder="{{'signUp.zipCodePlaceholder' | translate}}" name="zipcode" formControlName="zipcode"
+                    trim="blur" min="4" max="8" />
+                  <app-validation-message [control]="signUpForm.controls['zipcode']" [messages]="messageList.zipcode">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <input [type]="eyeShow ? 'text' : 'password'" class="form-control" id="password"
+                    placeholder="{{'signUp.passwordPlaceholder' | translate}}" name="password"
+                    formControlName="password" trim="blur" />
+                  <span>
+                    <i class="fa field-icon" [ngClass]="{
+                                          'fa-eye-slash': !eyeShow,
+                                          'fa-eye': eyeShow
+                                        }" (click)="toggleEyeShow()"></i>
+                  </span>
+                  <app-validation-message [control]="signUpForm.controls['password']" [messages]="messageList.password">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                <div class="form-group">
+                  <input [type]="isShowConfirmPassword ? 'text' : 'password'" class="form-control" id="confirmPassword"
+                    placeholder="{{'signUp.confirmPasswordPlaceholder' | translate}}" name="confirmPassword"
+                    formControlName="confirmPassword" trim="blur" />
+                  <span>
+                    <i class="fa field-icon" [ngClass]="{
+                                          'fa-eye-slash': !isShowConfirmPassword,
+                                          'fa-eye': isShowConfirmPassword
+                                        }" (click)="toggleisShowConfirmPassword()"></i>
+                  </span>
+                  <app-validation-message [control]="signUpForm.controls['confirmPassword']"
+                    [messages]="messageList.confirmPassword">
+                  </app-validation-message>
+                </div>
+              </div>
+              <div class="col-lg-12 text-center">
+                <div class="form-group">
+                  <button type="submit" class="btn btn-style btn-success">{{'signUp.submitBtn' | translate}}</button>
+                  <button type="button" class="btn btn-style btn-success ml-3"
+                    (click)="backToLogin()">{{'signUp.backToLoginBtn' | translate}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

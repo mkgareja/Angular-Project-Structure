@@ -1,0 +1,55 @@
+<form [formGroup]="upcForm" role="form" novalidate>
+    <div class="col-lg-12 d-flex p-0">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label class="logo-lable">
+                    <span class="titleSpn pt-0">{{'batchUpload.upcCode' | translate}}</span>
+                </label>
+                <div class="logo-group">
+                    <input type="text" #scanUpcCode class="form-control"
+                        placeholder="{{'productAdd.upcCodeLable' | translate}}" name="upcCode" formControlName="upcCode"
+                        (debounceClick)="processBarCode($event)" appDebounceKeyup>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 d-inline-flex align-items-start justify-content-end">
+            <button type="button" class="btn btn-style btn-success mt-3 ml-3 btnClear"
+                [disabled]="upcCodeList.length === 0" (click)="clear()">{{'batchUpload.btnClear' | translate}}</button>
+            <button type="button" class="btn btn-style btn-success mt-3 ml-3 btnClear"
+                [disabled]="upcCodeList.length === 0"
+                (click)="submit()">{{'batchUpload.btnSubmit' | translate}}</button>
+        </div>
+
+    </div>
+</form>
+<div class="col-md-12 d-flex" *ngIf="upcCodeList.length > 0">
+    <div class="indication"></div>
+    <span class="indicationText">{{'batchUpload.indicationMsg' | translate}}</span>
+</div>
+<div class="col-md-12 " *ngIf="upcCodeList.length > 0">
+    <div class="upc-code-wrap">
+        <div class="upc-code-list" *ngFor="let upc of upcCodeList; let i=index;">
+            <i class="fa fa-window-close pointer closeIcon" aria-hidden="true" (click)="openDeleteDialog( i)"></i>
+            <span [ngStyle]="{'background-color': !upc.valid ? 'red' : '' }">{{upc.code}}</span>
+        </div>
+    </div>
+</div>
+<ng-template #deleteDialog>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{{'batchUpload.deleteTitle' | translate}}</h4>
+            <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <label>{{'batchUpload.deleteMessage' | translate}}</label>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success"
+                (click)="clickActionDelete()">{{'productList.deleteYes' | translate}}</button>
+            <button type="button" class="btn btn-secondary"
+                (click)="closeModal()">{{'productList.deleteNo' | translate}}</button>
+        </div>
+    </div>
+</ng-template>

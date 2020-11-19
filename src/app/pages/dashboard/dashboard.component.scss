@@ -1,0 +1,23 @@
+.small-box .icon {
+    transition: all 0.3s linear;
+    top: -10px;
+    position: inherit;
+    right: 10px;
+    z-index: 0;
+    padding: 10px;
+    font-size: 40px;
+    color: rgba(255,255,255);
+}
+
+.number {
+    color:white;
+}
+
+.text{
+    color: white;
+}
+
+.boxColor {
+    cursor: pointer;
+    background-color: #d73925;
+}

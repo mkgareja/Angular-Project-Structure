@@ -1,0 +1,37 @@
+<div class="col-lg-12">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="detail-title">{{'productDetail.title' | translate}}</h3>
+      <div class="row detail">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 div-padding">
+          <p>{{'productDetail.nameLabel' | translate}} <span>{{productDetails?.product?.productname}}</span></p>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 div-padding">
+          <p>{{'productDetail.priceLabel' | translate}} <span>{{productDetails?.product?.price}} $</span></p>
+        </div>
+        <!-- <div>
+          <p>{{'productDetail.introLabel' | translate}} <span>{{productDetails.product.productIntro}}</span></p>
+        </div> -->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 div-padding">
+          <p>{{'productDetail.descriptionLabel' | translate}} <span>{{productDetails?.product?.description}}</span>
+          </p>
+        </div>
+        <div class="image-display">
+          <p>{{'productDetail.imageLabel' | translate}}</p>
+          <ng-container *ngIf="!!productDetails?.product">
+            <img *ngFor="let image of productDetails?.product.image" [src]="image.thumb" class="ml-3">
+          </ng-container>
+        </div>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 div-padding">
+        <span class="reviewTitle"> {{'productDetail.review' | translate}}</span>
+        <div>
+          <app-review *ngFor="let reviewPR of reviewList" [review]=reviewPR></app-review>
+        </div>
+      </div>
+      <div class="see-all" *ngIf="reviewCount > 3">
+        <span (click)="onSeeAll(productDetails)">{{'productDetail.seeAll' | translate}}</span>
+      </div>
+    </div>
+  </div>
+</div>
